@@ -50,38 +50,27 @@ Node* getSubMatrix(Node* head)
 
 
 	//MUST FIND FIRST MINOR HEAD
-	while (current)//->next
+	while (current->next)//->next
 	{
 		int currRow = current->row;
 		int currCol = current->col;
 
-		if ((currRow != exRow) && (currCol != exCol))
+		if ((currRow != exRow) && (currCol != exCol)) //IF it's not in the excluded row or column...
 		{
+			//Reduce row and column index, part of making the minor, works according to debug line#1
 			current->row = currRow - 1;
 			if (current->col > 0)
 			{
 				current->col -= 1;
 			}
 
-			if (!childFound) //First "safe" node in list
+			if (!childFound) //First "safe" node in list, meant to be saved as head of new list and returned
 			{
 				child = current;
 				childFound = true;
 			}
 			
-						
-			//vvv For some reason, outputs desired list vvv
-			//cout << "Current data: " << current->value << ": (" << current->row << "," << current->col << ")" << endl;
-			//Outputs desired list, with unchanged index (Expected)
-
-			//temp = new Node();
-			//temp = current;	//Reduce row and col since they will be reduced as part of making minor
-			//temp->row = temp->row - 1;
-			//if (temp->col != 0)
-			//{
-			//	temp->col = temp->col - 1;
-			//}	Rewrite to use change current data directly
-			
+			//debug line#1
 			cout << "Current data: " << current->value << ": (" << current->row << "," << current->col << ")" << endl;
 
 		}
@@ -94,9 +83,6 @@ Node* getSubMatrix(Node* head)
 		{
 			return child;
 		}
-		//current = current->next;	//Iterate
-		//cout << "exRow: " <<exRow << "," << "exCol: " << exCol << endl;
-
 	}
 }
 
